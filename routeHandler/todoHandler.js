@@ -43,15 +43,12 @@ router.post("/all", async (req, res) => {
 // put todo
 
 router.put("/:id", async (req, res) => {
+  const updatedDoc = req.body;
   try {
-    const result = await Todo.updateOne(
+    const result = await Todo.findByIdAndUpdate(
       { _id: req.params.id },
-      {
-        $set: {
-          status: "inActive",
-          title: "shakib al hasan",
-        },
-      }
+      updatedDoc,
+      { new: true }
     );
     if (result.modifiedCount === 0) {
       return res
