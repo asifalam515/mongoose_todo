@@ -42,7 +42,33 @@ router.post("/all", async (req, res) => {
 
 // put todo
 
-router.put("/:id", async (req, res) => {});
+router.put("/:id", async (req, res) => {
+  try {
+    const result = await Todo.updateOne(
+      { _id: req.params.id },
+      {
+        $set: {
+          status: "inActive",
+          title: "shakib al hasan",
+        },
+      }
+    );
+    if (result.modifiedCount === 0) {
+      return res
+        .status(404)
+        .json({ message: "No document updated. ID might be invalid." });
+    }
+    res.status(200).json({
+      message: "Todo updated successfully",
+      result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: "Server error during update",
+      details: err.message,
+    });
+  }
+});
 
 // delete
 router.delete("/:id", async (req, res) => {});
