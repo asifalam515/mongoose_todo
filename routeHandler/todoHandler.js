@@ -3,10 +3,28 @@ import { Todo } from "../schemas/todoSchema.js";
 const app = express();
 const router = Router();
 // get all todos
-router.get("/", async (req, res) => {});
+router.get("/", async (req, res) => {
+  const result = await Todo.find();
+  if (result.length == 0) {
+    return res.status(500).json({ message: "no data found" });
+  }
+  res.json({
+    data: result,
+    message: "all todos found",
+  });
+});
 
 // get a todo by id
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  const result = await Todo.findById(req.params.id);
+  if (result.length == 0) {
+    return res.status(500).json({ message: "no data found" });
+  }
+  res.json({
+    data: result,
+    message: "single data found",
+  });
+});
 // post a todo
 router.post("/", async (req, res) => {
   try {
