@@ -3,17 +3,18 @@ const { Schema } = mongoose;
 const todoSchema = new Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
-  author: String,
+  description: String,
   body: String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs: Number,
+  status: {
+    type: String,
+    enum: ["active", "inActive"],
+  },
+  Date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
-const Todos = mongoose.model("Todos", todoSchema);
+export const Todo = mongoose.model("Todo", todoSchema);
