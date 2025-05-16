@@ -16,5 +16,8 @@ const todoSchema = new Schema({
     default: Date.now,
   },
 });
-
+// add an instance method
+todoSchema.methods.getTitleName = function () {
+  return `${this.title}`;
+};
 export const Todo = mongoose.model("Todo", todoSchema);

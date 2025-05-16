@@ -1,14 +1,14 @@
-import express from "express";
+import express, { Router } from "express";
 import mongoose from "mongoose";
 
-import todoRouter from "./routeHandler/todoHandler.js";
 import cors from "cors";
+import router from "./routeHandler/todoHandler.js";
 const app = express();
 
 // middlewares
 app.use(express.json());
 app.use(cors());
-app.use("/todo", todoRouter);
+app.use("/todo", router);
 const port = 5000;
 
 // database connection with mongoose

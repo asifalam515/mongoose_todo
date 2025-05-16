@@ -17,9 +17,11 @@ router.get("/", async (req, res) => {
 // get a todo by id
 router.get("/:id", async (req, res) => {
   const result = await Todo.findById(req.params.id);
+
   if (result.length == 0) {
     return res.status(500).json({ message: "no data found" });
   }
+  console.log(result.getTitleName());
   res.json({
     data: result,
     message: "single data found",
@@ -92,4 +94,5 @@ router.delete("/:id", async (req, res) => {
     message: "Deleted ",
   });
 });
+
 export default router;
